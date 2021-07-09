@@ -29,13 +29,13 @@ module.exports = (app) => {
     })
 
     app.delete('api/notes', (req, res) => {
-        dataNote = dataNote.filter(each => each.id !== req.params.id);
-        console.log(dataNote);
+        newNote = newNote.filter(each => each.id !== req.params.id);
+        console.log(newNote);
 
-        // fs.writeFile("./db/db.json", JSON.stringify(dataNote), err => {
-        //     if (error) throw error;
-        // })
-        // res.json(dataNote);
+        fs.writeFile("./db/db.json", JSON.stringify(newNote), err => {
+            if (error) throw error;
+        })
+        res.json(newNote);
     })
 }
  
