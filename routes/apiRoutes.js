@@ -28,18 +28,21 @@ module.exports = (app) => {
 
     })
 
-    app.delete('api/notes/:id', (req, res) => {
+    app.delete('/api/notes/:id', (req, res) => {
+        console.log(req.params);
         fs.readFile("./db/db.json", (error,data) => {
             if (error) throw error;
             var oldNote = JSON.parse(data);
-            oldNote = newNote.filter(each => each.id !== req.params.id);
+            oldNote = oldNote.filter(each => each.id !== req.params.id);
             console.log(oldNote);
+            fs.writeFile("./db/db.json", JSON.stringify(oldNote), err => {
+                if (error) throw error;
+                res.json(oldNote);
+            })
         })
 
-        // fs.writeFile("./db/db.json", JSON.stringify(newNote), err => {
-        //     if (error) throw error;
-        // })
-        // res.json(newNote);
+
+        
     })
 }
  
